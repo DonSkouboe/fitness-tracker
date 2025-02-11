@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker 0.1e</title>
+    <title>Fitness Tracker 0.1f</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,8 +71,8 @@
         <textarea id="input">Lav min træningsplan i følgende format:
 - Øvelse Sæt x Reps @ Vægt
 Eksempel:
-- Squat 4x10 @ 80kg
-- Bench Press 3x8 @ 60kg
+- Squat 4x10 @ 80/60/30kg
+- Bench Press 3x8/6/4 @ 60kg
 - Pull-ups 3x12</textarea>
         <button onclick="processWorkout()">Formatér Træning</button>
         <button onclick="saveWorkout()">Gem Træning</button>
@@ -115,16 +115,19 @@ Eksempel:
             tableBody.innerHTML = "";
             
             lines.forEach(line => {
-                let match = line.match(/[-\s]*([A-Za-zæøåÆØÅ\-]+)\s*-?\s*(\d+)\s*x\s*(\d+)(?:\s*@\s*(\d+kg))?/);
+                let match = line.match(/[-\s]*([A-Za-zæøåÆØÅ\-]+)\s*-?\s*(\d+)\s*x\s*([\d/]+)(?:\s*@\s*([\d/kg/]+))?/);
                 if (match) {
                     let exercise = match[1].trim();
                     let sets = parseInt(match[2]);
-                    let reps = parseInt(match[3]);
-                    let weight = match[4] ? match[4] : 'Kropsvægt';
+                    let repsList = match[3].split('/');
+                    let weightList = match[4] ? match[4].split('/') : Array(sets).fill('Kropsvægt');
                     
-                    for (let i = 1; i <= sets; i++) {
+                    for (let i = 0; i < sets; i++) {
+                        let reps = repsList[i] || repsList[repsList.length - 1];
+                        let weight = weightList[i] || weightList[weightList.length - 1];
+                        
                         let row = `<tr>
-                            <td>${exercise} (Sæt ${i})</td>
+                            <td>${exercise} (Sæt ${i + 1})</td>
                             <td>1</td>
                             <td><input type='number' value='${reps}'></td>
                             <td><input type='number' value='${weight.replace('kg', '')}'> kg</td>
@@ -142,30 +145,6 @@ Eksempel:
             let completedTableBody = document.querySelector("#completedSetsTable tbody");
             completedTableBody.appendChild(row);
             button.remove();
-        }
-        
-        function saveWorkout() {
-            let inputText = document.getElementById("input").value;
-            localStorage.setItem("savedWorkout", inputText);
-            alert("Træning gemt!");
-        }
-        
-        function loadWorkout() {
-            let savedWorkout = localStorage.getItem("savedWorkout");
-            if (savedWorkout) {
-                document.getElementById("input").value = savedWorkout;
-                processWorkout();
-            } else {
-                alert("Ingen gemt træning fundet!");
-            }
-        }
-        
-        function clearWorkout() {
-            localStorage.removeItem("savedWorkout");
-            document.getElementById("input").value = "";
-            document.querySelector("#workoutTable tbody").innerHTML = "";
-            document.querySelector("#completedSetsTable tbody").innerHTML = "";
-            alert("Træning slettet!");
         }
     </script>
 </body>
