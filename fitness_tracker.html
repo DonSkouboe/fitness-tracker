@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker 0.1a</title>
+    <title>Fitness Tracker 0.1b</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,7 +68,7 @@
     <div class="container">
         <h1>Fitness Tracker</h1>
         <p>Indsæt din træningsplan nedenfor:</p>
-        <textarea id="input" placeholder="F.eks. - Squat 4x10 @ 80kg"></textarea>
+        <textarea id="input" placeholder="Lav min træningsplan i følgende format:\n- Øvelse Sæt x Reps @ Vægt\nEksempel:\n- Squat 4x10 @ 80kg\n- Bench Press 3x8 @ 60kg\n- Pull-ups 3x12"></textarea>
         <button onclick="processWorkout()">Formatér Træning</button>
         <button onclick="saveWorkout()">Gem Træning</button>
         <button onclick="loadWorkout()">Indlæs Tidligere Træning</button>
@@ -98,7 +98,7 @@
             lines.forEach(line => {
                 let match = line.match(/[-\s]*([A-Za-zæøåÆØÅ ]+)\s*-?\s*(\d+)\s*x\s*(\d+)(?:\s*@\s*(\d+kg))?/);
                 if (match) {
-                    let exercise = match[1];
+                    let exercise = match[1].trim();
                     let sets = parseInt(match[2]);
                     let reps = parseInt(match[3]);
                     let weight = match[4] ? match[4] : 'Kropsvægt';
