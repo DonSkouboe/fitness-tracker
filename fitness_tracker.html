@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker 0.1c</title>
+    <title>Fitness Tracker 0.1d</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,7 +67,7 @@
 <body>
     <div class="container">
         <h1>Fitness Tracker</h1>
-        <p>Kopiere følgende tekst og sæt den ind i ChatGPT for at få dit træningsprogram i appen:</p>
+        <p>Indsæt din træningsplan nedenfor:</p>
         <textarea id="input">Lav min træningsplan i følgende format:
 - Øvelse Sæt x Reps @ Vægt
 Eksempel:
@@ -101,7 +101,7 @@ Eksempel:
             tableBody.innerHTML = "";
             
             lines.forEach(line => {
-                let match = line.match(/[-\s]*([A-Za-zæøåÆØÅ ]+)\s*-?\s*(\d+)\s*x\s*(\d+)(?:\s*@\s*(\d+kg))?/);
+                let match = line.match(/[-\s]*([A-Za-zæøåÆØÅ\-]+)\s*-?\s*(\d+)\s*x\s*(\d+)(?:\s*@\s*(\d+kg))?/);
                 if (match) {
                     let exercise = match[1].trim();
                     let sets = parseInt(match[2]);
