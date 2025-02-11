@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker</title>
+    <title>Fitness Tracker 0.2</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,6 +47,8 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            overflow-x: auto;
+            display: block;
         }
         th, td {
             border: 1px solid #ddd;
@@ -61,6 +63,32 @@
             width: 50px;
             padding: 5px;
             text-align: center;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+                width: 100%;
+            }
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
+            th, td {
+                font-size: 12px;
+                padding: 5px;
+            }
+            input {
+                width: 40px;
+            }
+            table {
+                font-size: 12px;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
         }
     </style>
 </head>
@@ -138,21 +166,6 @@ Eksempel:
                     }
                 }
             });
-        }
-        
-        function completeSet(button) {
-            let row = button.parentElement.parentElement;
-            let completedTableBody = document.querySelector("#completedSetsTable tbody");
-            completedTableBody.appendChild(row);
-            button.remove();
-        }
-        
-        function clearWorkout() {
-            localStorage.removeItem("savedWorkout");
-            document.getElementById("input").value = "";
-            document.querySelector("#workoutTable tbody").innerHTML = "";
-            document.querySelector("#completedSetsTable tbody").innerHTML = "";
-            alert("Træning slettet!");
         }
     </script>
 </body>
