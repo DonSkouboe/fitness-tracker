@@ -146,6 +146,14 @@ Eksempel:
             completedTableBody.appendChild(row);
             button.remove();
         }
+        
+        function clearWorkout() {
+            localStorage.removeItem("savedWorkout");
+            document.getElementById("input").value = "";
+            document.querySelector("#workoutTable tbody").innerHTML = "";
+            document.querySelector("#completedSetsTable tbody").innerHTML = "";
+            alert("Træning slettet!");
+        }
     </script>
 </body>
 </html>
