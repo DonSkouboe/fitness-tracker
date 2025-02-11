@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker 0.2</title>
+    <title>Fitness Tracker 0.2a</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -166,6 +166,13 @@ Eksempel:
                     }
                 }
             });
+        }
+        
+        function completeSet(button) {
+            let row = button.parentElement.parentElement;
+            let completedTableBody = document.querySelector("#completedSetsTable tbody");
+            completedTableBody.appendChild(row);
+            button.remove();
         }
     </script>
 </body>
