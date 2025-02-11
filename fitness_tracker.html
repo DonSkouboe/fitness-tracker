@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker 0.1d</title>
+    <title>Fitness Tracker 0.1e</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -87,6 +87,20 @@ Eksempel:
                     <th>Reps</th>
                     <th>Vægt</th>
                     <th>RPE</th>
+                    <th>Handling</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h2>Færdiggjorte Sæt</h2>
+        <table id="completedSetsTable">
+            <thead>
+                <tr>
+                    <th>Øvelse</th>
+                    <th>Sæt</th>
+                    <th>Reps</th>
+                    <th>Vægt</th>
+                    <th>RPE</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -115,11 +129,19 @@ Eksempel:
                             <td><input type='number' value='${reps}'></td>
                             <td><input type='number' value='${weight.replace('kg', '')}'> kg</td>
                             <td><input type='number' value='7'></td>
+                            <td><button onclick='completeSet(this)'>Slut Sæt</button></td>
                         </tr>`;
                         tableBody.innerHTML += row;
                     }
                 }
             });
+        }
+        
+        function completeSet(button) {
+            let row = button.parentElement.parentElement;
+            let completedTableBody = document.querySelector("#completedSetsTable tbody");
+            completedTableBody.appendChild(row);
+            button.remove();
         }
         
         function saveWorkout() {
@@ -142,6 +164,7 @@ Eksempel:
             localStorage.removeItem("savedWorkout");
             document.getElementById("input").value = "";
             document.querySelector("#workoutTable tbody").innerHTML = "";
+            document.querySelector("#completedSetsTable tbody").innerHTML = "";
             alert("Træning slettet!");
         }
     </script>
