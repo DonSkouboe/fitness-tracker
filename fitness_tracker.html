@@ -38,6 +38,7 @@
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
+            margin-top: 5px;
         }
         button:hover {
             background-color: #218838;
@@ -64,6 +65,9 @@
         <p>Indsæt din træningsplan nedenfor:</p>
         <textarea id="input" placeholder="F.eks. - Squat 4x10 @ 80kg"></textarea>
         <button onclick="processWorkout()">Formatér Træning</button>
+        <button onclick="saveWorkout()">Gem Træning</button>
+        <button onclick="loadWorkout()">Indlæs Tidligere Træning</button>
+        <button onclick="clearWorkout()">Slet Træning</button>
         <h2>Formateret Træning</h2>
         <table id="workoutTable">
             <thead>
@@ -97,6 +101,29 @@
                     tableBody.innerHTML += row;
                 }
             });
+        }
+        
+        function saveWorkout() {
+            let inputText = document.getElementById("input").value;
+            localStorage.setItem("savedWorkout", inputText);
+            alert("Træning gemt!");
+        }
+        
+        function loadWorkout() {
+            let savedWorkout = localStorage.getItem("savedWorkout");
+            if (savedWorkout) {
+                document.getElementById("input").value = savedWorkout;
+                processWorkout();
+            } else {
+                alert("Ingen gemt træning fundet!");
+            }
+        }
+        
+        function clearWorkout() {
+            localStorage.removeItem("savedWorkout");
+            document.getElementById("input").value = "";
+            document.querySelector("#workoutTable tbody").innerHTML = "";
+            alert("Træning slettet!");
         }
     </script>
 </body>
