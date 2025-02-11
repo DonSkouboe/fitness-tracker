@@ -90,7 +90,7 @@
             tableBody.innerHTML = "";
             
             lines.forEach(line => {
-                let match = line.match(/- ([A-Za-zæøåÆØÅ ]+) (\d+)x(\d+)(?: @ (\d+kg))?/);
+                let match = line.match(/[-\s]*([A-Za-zæøåÆØÅ ]+)\s*-?\s*(\d+)\s*x\s*(\d+)(?:\s*@\s*(\d+kg))?/);
                 if (match) {
                     let row = `<tr>
                         <td>${match[1]}</td>
