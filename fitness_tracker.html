@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Tracker 0.2a</title>
+    <title>Fitness Tracker 0.2b</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -173,6 +173,14 @@ Eksempel:
             let completedTableBody = document.querySelector("#completedSetsTable tbody");
             completedTableBody.appendChild(row);
             button.remove();
+        }
+        
+        function clearWorkout() {
+            localStorage.removeItem("savedWorkout");
+            document.getElementById("input").value = "";
+            document.querySelector("#workoutTable tbody").innerHTML = "";
+            document.querySelector("#completedSetsTable tbody").innerHTML = "";
+            alert("Træning slettet!");
         }
     </script>
 </body>
